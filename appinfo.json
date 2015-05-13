@@ -1,0 +1,23 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "taturou@gmail.com",
+    "longName": "sample_invert",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "sample_invert",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "5baafa85-63f8-4df4-b586-c420f0f97a97",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
