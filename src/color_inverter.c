@@ -87,16 +87,16 @@ void s_grect_normalization(GRect *rect, GRect frame) {
     }
 }
 
-static void s_color_inverter_with_palette(struct Layer *layer, GContext *ctx, GRect rect, const uint8_t palette[64]) {
+static void s_color_inverter_with_palette(struct Layer *layer, GContext *ctx, GRect frame, const uint8_t palette[64]) {
     GRect layer_bounds = layer_get_bounds(layer);
-    s_grect_normalization(&rect, layer_bounds);
+    s_grect_normalization(&frame, layer_bounds);
 
     GBitmap *bmp = graphics_capture_frame_buffer(ctx);
     uint16_t padding = gbitmap_get_bytes_per_row(bmp) - layer_bounds.size.w;
     uint8_t *raw = gbitmap_get_data(bmp);
 
-    for (int y = rect.origin.y; y < (rect.origin.y + rect.size.h); y++) {
-        for (int x = rect.origin.x; x < (rect.origin.x + rect.size.w); x++) {
+    for (int y = frame.origin.y; y < (frame.origin.y + frame.size.h); y++) {
+        for (int x = frame.origin.x; x < (frame.origin.x + frame.size.w); x++) {
             int index = x + (y * (layer_bounds.size.w + padding));
             raw[index] = palette[raw[index] & 0x3F];
         }
@@ -105,8 +105,8 @@ static void s_color_inverter_with_palette(struct Layer *layer, GContext *ctx, GR
     graphics_release_frame_buffer(ctx, bmp);
 }
 
-void color_inverter(struct Layer *layer, GContext *ctx, GRect rect) {
-    s_color_inverter_with_palette(layer, ctx, rect, s_default_palette);
+void color_inverter(struct Layer *layer, GContext *ctx, GRect frame) {
+    s_color_inverter_with_palette(layer, ctx, frame, s_default_palette);
 }
 
 #endif /* PBL_SDK_3 */
